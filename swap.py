@@ -7,8 +7,9 @@ import requests
 from decimal import Decimal
 import copy
 
+
 def get_api_call_data(chain_id, from_token_address, to_token_address, amount_to_swap, wallet, slippage, logger, proxy='',):
-    url = f'https://api.1inch.io/v{s.INCH_VERSION}.0/{chain_id}/swap?fromTokenAddress={from_token_address}&toTokenAddress={to_token_address}&amount={amount_to_swap}&fromAddress={wallet}&slippage={slippage}'
+    url = f'https://api.1inch.io/v{s.INCH_VERSION}.3/{chain_id}/swap?fromTokenAddress={from_token_address}&toTokenAddress={to_token_address}&amount={amount_to_swap}&fromAddress={wallet}&slippage={slippage}'
     try:
         try:
             if proxy != '':
@@ -16,11 +17,11 @@ def get_api_call_data(chain_id, from_token_address, to_token_address, amount_to_
                     'http': proxy,
                     'https': proxy,
                 }
-                call_data = requests.get(url, proxies=proxies)
+                call_data = requests.get(url, proxies=proxies, headers=s.headers)
             else:
-                call_data = requests.get(url)
+                call_data = requests.get(url, headers=s.headers)
         except:
-            call_data = requests.get(url)
+            call_data = requests.get(url, headers=s.headers)
 
         if call_data.status_code == 200:
             api_data = call_data.json()

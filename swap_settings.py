@@ -2,6 +2,7 @@ from RPCs import RPC_LIST
 
 INCH_VERSION = 5
 
+headers = { "Authorization": "__Ваш API key__", "accept": "application/json" } # получать его здесь - https://portal.1inch.dev/dashboard
 
 TOKEN_LIST_BSC = [
     {
